@@ -7,10 +7,12 @@ import banner from '../images/banner.png';
 const MenuStyled = styled.main`
   background-color: #111;
   margin-top: 110px;
+  margin-left: 380px;
 `;
 
 const SectionMenu = styled.section`
   padding: 30px;
+  padding-left: 60px;
   color: #28B463;
 `
 

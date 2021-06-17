@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ButtonCheckout } from './ButtonCheckout'
+
 
 const Overlay = styled.div`
   position: fixed;
@@ -44,28 +46,12 @@ const ModalHeader = styled.div`
   font-size: 30px;
 `
 
-const ModalButton = styled.button`
-  font-family: Roboto;
-  border-radius: 10px;
-  font-size: 30px;
-  padding: 20px 60px;
-  background-color: #28B463;
-  border: none;
-  outline: none;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #E65B3E;
-    color: whitesmoke;
-  }
-`
 const ModalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 200px);
   height: 400px;
   padding-bottom: 20px;
 `
@@ -88,7 +74,7 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
             <p>{openItem.name}</p>
             <p>{openItem.price.toLocaleString('ru-RU', {style: 'currency', currency: 'RUB'})}</p>
           </ModalHeader>
-          <ModalButton>Добавить</ModalButton>
+          <ButtonCheckout>Добавить</ButtonCheckout>
         </ModalWrapper>
       </Modal>
     </Overlay>
