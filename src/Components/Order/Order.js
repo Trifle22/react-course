@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonCheckout } from './ButtonCheckout'
+import { ButtonCheckout } from '../Style/ButtonCheckout'
 import { OrderListItem } from './OrderListItem'
 
 
@@ -51,17 +51,20 @@ const buttonStyles = {
   marginBottom: "50px"
 }
 
-export const Order = () => {
+const EmptyList = styled.div`
+  text-align: center;
+`
+
+export const Order = ({ orders }) => {
   return (
     <>
       <OrderStyled>
         <OrderTitle>ВАШ ЗАКАЗ</OrderTitle>
         <OrderContent>
+          {orders.length ? 
           <OrderList>
-            <OrderListItem></OrderListItem>
-            <OrderListItem></OrderListItem>
-            <OrderListItem></OrderListItem>
-          </OrderList>
+            {orders.map(order => <OrderListItem order={order}/>)}
+          </OrderList> : <EmptyList>Список заказов пуст</EmptyList>}
         </OrderContent>
         <Total>
           <span>Итого</span>
