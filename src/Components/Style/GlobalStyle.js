@@ -40,8 +40,20 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
-  input {
+  input, button {
     font-family: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield
+  }
+
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none
   }
 `
 
