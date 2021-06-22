@@ -8,6 +8,7 @@ import { formatCurrency } from '../Functions/secondaryFunction'
 const OrderItemStyled = styled.li`
   display: flex;
   margin: 15px 0;
+  flex-wrap: wrap;
 `
 
 const ItemName = styled.span`
@@ -33,11 +34,33 @@ const TrashButton = styled.button`
   cursor: pointer;
 `
 
-export const OrderListItem = ({ order }) => (
-  <OrderItemStyled>
+const OrderItemToppings = styled.ul`
+  display: block;
+  width: 100%;
+  text-align: left;
+  list-style: circle;
+  margin-left: 30px;
+`
+const OrderItemTopping = styled.li`
+  font-size: 16px;
+`
+
+const getCheckedToppings = toppings => {
+  const values = [...Object.values(toppings)].filter(item => item.checked)
+  const result = []
+  values.map(item => result.push(item.name))
+  return result
+}
+
+export const OrderListItem = ({ order }) => {
+  console.log(getCheckedToppings(order.topping));
+  return (
+    <OrderItemStyled>
     <ItemName>{order.name}</ItemName>
     <span>{order.count}</span>
     <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
     <TrashButton/>
-  </OrderItemStyled>  
-)
+    <OrderItemToppings>{getCheckedToppings(order.topping).map(item => <OrderItemTopping>{item}</OrderItemTopping>)}</OrderItemToppings>
+  </OrderItemStyled>
+  )
+}
