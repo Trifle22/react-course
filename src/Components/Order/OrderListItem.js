@@ -38,7 +38,7 @@ const OrderItemToppings = styled.ul`
   display: block;
   width: 100%;
   text-align: left;
-  list-style: circle;
+  list-style: square;
   margin-left: 30px;
 `
 const OrderItemTopping = styled.li`
@@ -53,14 +53,15 @@ const getCheckedToppings = toppings => {
 }
 
 export const OrderListItem = ({ order }) => {
-  console.log(getCheckedToppings(order.topping));
   return (
-    <OrderItemStyled>
-    <ItemName>{order.name}</ItemName>
+    <OrderItemStyled >
+    <ItemName>{order.name} {order.choice}</ItemName>
     <span>{order.count}</span>
     <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-    <TrashButton/>
-    <OrderItemToppings>{getCheckedToppings(order.topping).map(item => <OrderItemTopping>{item}</OrderItemTopping>)}</OrderItemToppings>
+    <TrashButton />
+    <OrderItemToppings>
+      {getCheckedToppings(order.topping).map(item => <OrderItemTopping>{item}</OrderItemTopping>)}
+    </OrderItemToppings>
   </OrderItemStyled>
   )
 }

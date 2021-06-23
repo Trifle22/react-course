@@ -10,12 +10,13 @@ import { useOrders } from './Components/Hooks/useOrders'
 function App() {
   const openItem = useOpenItem()
   const orders = useOrders()
+  const setOrders = useOrders()
 
   return (
     <>
       <GlobalStyle/>
       <NavBar/>
-      <Order {...orders}/>
+      <Order {...orders} setOrders={setOrders}/>
       <Menu {...openItem}/>
       {openItem.openItem && <ModalItem {...openItem} {...orders}/>}
     </>
