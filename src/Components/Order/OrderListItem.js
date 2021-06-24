@@ -52,13 +52,13 @@ const getCheckedToppings = toppings => {
   return result
 }
 
-export const OrderListItem = ({ order }) => {
+export const OrderListItem = ({ order, index, deleteItem }) => {
   return (
     <OrderItemStyled >
     <ItemName>{order.name} {order.choice}</ItemName>
     <span>{order.count}</span>
     <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-    <TrashButton />
+    <TrashButton onClick={() => deleteItem(index)}/>
     <OrderItemToppings>
       {getCheckedToppings(order.topping).map(item => <OrderItemTopping>{item}</OrderItemTopping>)}
     </OrderItemToppings>
