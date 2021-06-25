@@ -57,7 +57,7 @@ const EmptyList = styled.div`
   text-align: center;
 `
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
 
   const total = orders.reduce((result, order) => 
     totalPriceItems(order) + result , 0)
@@ -79,7 +79,13 @@ export const Order = ({ orders, setOrders }) => {
         <OrderContent>
           {orders.length ? 
           <OrderList>
-            {orders.map((order, index) => <OrderListItem key={index} order={order} deleteItem={deleteItem} index={index}/>)}
+            {orders.map((order, index) => 
+            <OrderListItem
+              key={index}
+              order={order}
+              deleteItem={deleteItem} 
+              index={index}
+              setOpenItem={setOpenItem}/>)}
           </OrderList> : <EmptyList>Список заказов пуст</EmptyList>}
         </OrderContent>
         <Total>
