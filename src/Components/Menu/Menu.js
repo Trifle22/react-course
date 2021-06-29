@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import dbMenu from '../DBMenu'
 import { ListItem } from './ListItem'
-import banner from '../../images/banner.png';
+import banner from '../../images/banner.png'
 
 const MenuStyled = styled.main`
   background-color: #111;

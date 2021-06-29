@@ -28,6 +28,8 @@ function App() {
   const openItem = useOpenItem()
   const orders = useOrders()
 
+  useTitle('MrDonlalds')
+
   return (
     <>
       <GlobalStyle/>
@@ -38,7 +40,7 @@ function App() {
         {...auth}
         firebaseDatabase={firebase.database}
         />
-      <Menu {...openItem}/>
+      <Menu {...openItem} />
       {openItem.openItem && <ModalItem {...openItem} {...orders}/>}
     </>
   );
