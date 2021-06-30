@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import dbMenu from '../DBMenu'
 import { ListItem } from './ListItem'
 import banner from '../../images/banner.png'
+import { useFetch } from '../Hooks/useFetch'
+import { Lines } from 'react-preloaders';
 
 const MenuStyled = styled.main`
   background-color: #111;
@@ -26,18 +27,26 @@ const Banner = styled.div`
 `
 
 export const Menu = ({ setOpenItem }) => {
+  const res = useFetch()
+
+  const dbMenu = res.response
   return (
     <MenuStyled>
-      {/* banner */}
       <Banner />
-      <SectionMenu>
+      { res.response ? 
+      <>
+        <SectionMenu>
         <h2>Бургеры</h2>
         <ListItem itemList={dbMenu.burger} setOpenItem={setOpenItem}/>
-      </SectionMenu>
-      <SectionMenu>
+        </SectionMenu>
+        <SectionMenu>
         <h2>Закуски / Напитки</h2>
         <ListItem itemList={dbMenu.other} setOpenItem={setOpenItem}/>
-      </SectionMenu>
+        </SectionMenu>
+      </> : 
+          res.error ? <div>sorry, we will fix it soon...</div> : <Lines></Lines>
+      }
+      
     </MenuStyled>
 
   ) 

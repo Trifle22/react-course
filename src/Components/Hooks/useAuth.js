@@ -15,7 +15,7 @@ export const useAuth = (authFirebase) => {
         setAuthentication(user)
       } else { setAuthentication(null) }
     })
-  }, [authentication])
+  }, [auth, authentication])
 
   return {authentication, logIn, logOut}
 }
