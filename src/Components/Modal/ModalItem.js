@@ -11,7 +11,7 @@ import { useToppings } from '../Hooks/useToppings'
 import { useChoices } from '../Hooks/useChoices'
 
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -103,7 +103,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   `
 
   return (

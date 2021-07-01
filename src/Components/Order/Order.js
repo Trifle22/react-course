@@ -4,7 +4,6 @@ import { ButtonCheckout } from '../Style/ButtonCheckout'
 import { OrderListItem } from './OrderListItem'
 import { totalPriceItems } from '../Functions/secondaryFunction'
 import { formatCurrency } from '../Functions/secondaryFunction'
-import { projection } from '../Functions/secondaryFunction'
 
 
 const OrderStyled = styled.section`
@@ -21,7 +20,7 @@ const OrderStyled = styled.section`
   flex-direction: column;
 `
 
-const OrderTitle = styled.h2`
+export const OrderTitle = styled.h2`
   text-align: center;
   margin-top: 20px;
 `
@@ -35,7 +34,7 @@ const OrderList = styled.ul`
 
 `
 
-const Total = styled.div`
+export const Total = styled.div`
   display: flex;
   margin-bottom: 20px;
   justify-content: space-between;
@@ -44,7 +43,7 @@ const Total = styled.div`
     text-align: left;
   }
 `
-const TotalPrice = styled.span`
+export const TotalPrice = styled.span`
   text-align: right;
   min-width: 65px;
   margin-left: 20px;
@@ -58,17 +57,14 @@ const EmptyList = styled.div`
   text-align: center;
 `
 
-const rulesData = {
-  name: ['name'],
-  price: ['price'],
-  count: ['count'],
-  topping: ['topping', arr => arr.filter(obj => obj.checked).map(obj => obj.name), 
-            arr => arr.length ? arr : 'no toppings'],
-  choice: ['choice', item => item ? item : 'no choices']
-}
-
-export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, firebaseDatabase }) => {
-  const dataBase = firebaseDatabase()
+export const Order = ({ 
+  orders, 
+  setOrders, 
+  setOpenItem, 
+  authentication, 
+  logIn,
+  setOpenOrderConfirm }) => {
+    
   const total = orders.reduce((result, order) => 
     totalPriceItems(order) + result , 0)
 
@@ -81,15 +77,7 @@ export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, f
     setOrders(newOrders)
   }
 
-  const sendOrder = () => {
-    const newOrder = orders.map(projection(rulesData))
-    dataBase.ref('orders').push().set({
-      clientName: authentication.displayName,
-      email: authentication.email,
-      order: newOrder
-    })
-    setOrders([])
-  }
+
 
 
   return (
@@ -115,7 +103,7 @@ export const Order = ({ orders, setOrders, setOpenItem, authentication, logIn, f
         </Total>
         <ButtonCheckout style={buttonStyles} onClick={() => {
           if (authentication) {
-            sendOrder()
+            setOpenOrderConfirm(true)
           } else {
             logIn()
           }
