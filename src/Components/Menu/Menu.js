@@ -1,8 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ListItem } from './ListItem'
 import banner from '../../images/banner.png'
-import { Context } from '../Functions/context'
+import ClipLoader from "react-spinners/ClipLoader";
+
+const PreLoaderWrap = styled.div`
+  background-color: #111;
+  margin-top: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
 
 const MenuStyled = styled.main`
   background-color: #111;
@@ -26,23 +35,20 @@ const Banner = styled.div`
 `
 
 export const Menu = ({ dbMenu }) => {
-  const {openItem: {setOpenItem}} = useContext(Context)
   return (
     <MenuStyled>
       <Banner />
-      { dbMenu ? 
-      <>
-        <SectionMenu>
-        <h2>Бургеры</h2>
-        <ListItem itemList={dbMenu.burger} setOpenItem={setOpenItem}/>
-        </SectionMenu>
-        <SectionMenu>
-        <h2>Закуски / Напитки</h2>
-        <ListItem itemList={dbMenu.other} setOpenItem={setOpenItem}/>
-        </SectionMenu>
-      </> : <div>load...</div>
-      }
-      
+      {dbMenu ? 
+                <>
+                <SectionMenu>
+                <h2>Бургеры</h2>
+                <ListItem itemList={dbMenu.burger} />
+                </SectionMenu>
+                <SectionMenu>
+                <h2>Закуски / Напитки</h2>
+                <ListItem itemList={dbMenu.other} />
+                </SectionMenu>
+              </> : <PreLoaderWrap><ClipLoader color={"#E65B3E"} size={300}/></PreLoaderWrap>}
     </MenuStyled>
 
   ) 

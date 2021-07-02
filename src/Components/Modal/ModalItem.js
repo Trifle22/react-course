@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from  'react'
 import styled from 'styled-components'
 import { ButtonCheckout } from '../Style/ButtonCheckout'
 import { CountItem } from './CountItem'
@@ -9,6 +9,7 @@ import { Toppings } from './Toppings'
 import { Choices } from './Choices'
 import { useToppings } from '../Hooks/useToppings'
 import { useChoices } from '../Hooks/useChoices'
+import { Context }  from '../Functions/context'
 
 
 export const Overlay = styled.div`
@@ -65,13 +66,12 @@ const ModalWrapper = styled.div`
 `
 
 
-export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
-
+export const ModalItem = () => {
+  const {orders: {orders, setOrders}, openItem: {openItem, setOpenItem}} = useContext(Context)
   const counter = useCount(openItem.count)
   const toppings = useToppings(openItem)
   const choices = useChoices(openItem)
   const isEdit = openItem.index  > -1;
-
   const closeModal = (event) => {
     if (event.target.id === 'overlay') {
       setOpenItem(null)

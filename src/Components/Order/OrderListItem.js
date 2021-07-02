@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
 import trashImage from '../../images/trash.svg'
 import { totalPriceItems } from '../Functions/secondaryFunction'
 import { formatCurrency } from '../Functions/secondaryFunction'
+import {Context} from '../Functions/context'
 
 
 const OrderItemStyled = styled.li`
@@ -53,7 +54,8 @@ const getCheckedToppings = toppings => {
   return result
 }
 
-export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
+export const OrderListItem = ({ order, index, deleteItem  }) => {
+  const {openItem: {setOpenItem}} = useContext(Context)
   const count = order.count
 
   const refDeleteButton = useRef(null)

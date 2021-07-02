@@ -15,6 +15,7 @@ import { useDB } from './Components/Hooks/useDB'
 import { OrderConfirm } from './Components/Order/OrderConfirm'
 import { useOrderConfirm } from './Components/Hooks/useOrderConfirm'
 import { Context } from './Components/Functions/context'
+import {Planets} from 'react-preloaders';
 
 
 const firebaseConfig = {
@@ -40,23 +41,17 @@ function App() {
   return (
     <Context.Provider value={{
       auth,
-      openItem
+      openItem,
+      orders, 
+      orderConfirm,
+      firebaseDatabase: firebase.database
       }}>
       <GlobalStyle/>
-      <NavBar />
-      <Order 
-        {...orders} 
-        {...openItem} 
-        {...auth}
-        {...orderConfirm}
-        />
-      <Menu dbMenu={dbMenu}/>
-      {openItem.openItem && <ModalItem {...openItem} {...orders}/>}
-      {orderConfirm.openOrderConfirm && <OrderConfirm 
-      {...orders} 
-      {...auth} 
-      {...orderConfirm} 
-      firebaseDatabase={firebase.database}/>}
+      <NavBar/>
+      <Order/>
+      <Menu dbMenu={dbMenu}/> 
+      {openItem.openItem && <ModalItem/>}
+      {orderConfirm.openOrderConfirm && <OrderConfirm/>}
     </Context.Provider>
   );
 }
